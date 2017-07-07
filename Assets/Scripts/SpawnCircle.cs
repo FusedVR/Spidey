@@ -18,24 +18,19 @@ public class SpawnCircle : MonoBehaviour {
 	private IEnumerator StartSpawnCycle() {
         while (true) {
             Vector3 spawnPos = GetSpawnPosition();
-            Vector3 spawnForce = GetSpawnForce(spawnPos);
-            Spawn(spawnPos, spawnForce);
+            Spawn(spawnPos);
 
             yield return spawnDelay;
         }
     }
 
-    private void Spawn(Vector3 pos, Vector3 dir) {
+    private void Spawn(Vector3 pos) {
         GameObject item = spawnItems[Random.Range(0, spawnItems.Length)];
         
         GameObject spawnObj = Instantiate(item, pos, Random.rotation);
         Rigidbody rb = spawnObj.GetComponent<Rigidbody>();
         if (rb == null) {
             Destroy(spawnObj);
-            return;
-        } else {
-            rb.AddForce(dir * 200f);
-            rb.AddTorque(Random.onUnitSphere);
         }
     }
 
@@ -44,9 +39,5 @@ public class SpawnCircle : MonoBehaviour {
         float verticalOffset = Random.Range(0.5f, 2.5f);
 
         return new Vector3(planarOffset.x, verticalOffset, planarOffset.y);
-    }
-
-    private Vector3 GetSpawnForce(Vector3 spawnPos) {
-        return (transform.position - spawnPos).normalized;
     }
 }

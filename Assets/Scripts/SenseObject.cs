@@ -11,16 +11,22 @@ public class SenseObject : MonoBehaviour {
     private void Start() {
         rb = GetComponent<Rigidbody>();
         SpideySense.Instance.SenseObject(gameObject);
-        //Destroy(gameObject, 2f);
+
+        Transform target = Camera.main.transform;
+        Vector3 dir = (target.position - transform.position).normalized;
+        transform.LookAt(target);
+        rb.AddForce(dir * 200f);
     }
 
     private void OnCollisionEnter(Collision collision) {
         WebShot ws = collision.gameObject.GetComponent<WebShot>();
         if (rb == null || ws == null) return;
+        Destroy(ws.gameObject);
         GameObject cover = Instantiate(webCover, transform.position, transform.rotation);
         cover.transform.parent = transform;
         rb.useGravity = true;
         StartCoroutine(EaseOutVelocity());
+        Destroy(gameObject, 7f);
     }
 
     private IEnumerator EaseOutVelocity() {

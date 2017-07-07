@@ -32,12 +32,12 @@ public class SpideySense : MonoBehaviour {
         if (GeometryUtility.TestPlanesAABB(planes, co.bounds))
             Debug.Log(go.name + " is in view!");
         else
-            StartCoroutine(SlowTime());
+            //StartCoroutine(SlowTime());
             ToggleSenses(go);
     }
 
     private IEnumerator SlowTime() {
-        Time.timeScale = 0.5f;
+        Time.timeScale = 0.2f;
         sensesProcessing++;
         yield return senseWait;
         sensesProcessing--;
