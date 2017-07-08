@@ -16,6 +16,7 @@ public class SpideySense : MonoBehaviour {
     private float behindThreshold = -0.9f;
     private float boundsThreshold = Mathf.Sqrt(3f) / 2f;
 
+    private AudioSource src;
     private int sensesProcessing;
     private WaitForSeconds senseWait;
     private Camera cam;
@@ -25,6 +26,7 @@ public class SpideySense : MonoBehaviour {
         if (Instance == null) {
             Instance = this;
         }
+        src = gameObject.GetComponent<AudioSource>();
         senseWait = new WaitForSeconds(senseTime);
         cam = Camera.main;
     }
@@ -39,6 +41,7 @@ public class SpideySense : MonoBehaviour {
         else
             //Removed the following because the time slow down did not seem obvious enough or worthwhile. 
             //StartCoroutine(SlowTime());
+            src.Play();
             ToggleSenses(obj);
     }
 

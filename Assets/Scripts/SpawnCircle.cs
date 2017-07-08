@@ -10,7 +10,7 @@ public class SpawnCircle : MonoBehaviour {
     public float secondDelay;
     public GameObject[] spawnItems;
 
-    private float spawnSphereRadius = 5f;
+    private float spawnSphereRadius = 8f;
     private WaitForSeconds spawnDelay; 
 
 	// Use this for initialization
@@ -35,9 +35,10 @@ public class SpawnCircle : MonoBehaviour {
     }
 
     private Vector3 GetSpawnPosition() {
-        Vector2 planarOffset = Random.onUnitSphere * spawnSphereRadius;
+        Vector2 planarOffset = Random.insideUnitCircle.normalized * spawnSphereRadius;
         float verticalOffset = Random.Range(0.5f, 2.5f);
+        Vector3 spawnOffset = new Vector3(planarOffset.x, verticalOffset, planarOffset.y);
 
-        return new Vector3(planarOffset.x, verticalOffset, planarOffset.y);
+        return Camera.main.transform.position + spawnOffset;
     }
 }
