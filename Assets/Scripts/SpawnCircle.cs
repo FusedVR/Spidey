@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Class: SpawnCircle
+ * Spawns items from the spawnItems array on a sphere of radius 5 with random
+ * vertical offsets.
+ */
 public class SpawnCircle : MonoBehaviour {
     public float secondDelay;
     public GameObject[] spawnItems;
 
     private float spawnSphereRadius = 5f;
-    private WaitForSeconds spawnDelay;
+    private WaitForSeconds spawnDelay; 
 
 	// Use this for initialization
 	void Start () {
@@ -28,10 +32,6 @@ public class SpawnCircle : MonoBehaviour {
         GameObject item = spawnItems[Random.Range(0, spawnItems.Length)];
         
         GameObject spawnObj = Instantiate(item, pos, Random.rotation);
-        Rigidbody rb = spawnObj.GetComponent<Rigidbody>();
-        if (rb == null) {
-            Destroy(spawnObj);
-        }
     }
 
     private Vector3 GetSpawnPosition() {

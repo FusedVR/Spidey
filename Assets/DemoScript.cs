@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Class: DemoScript
+ * Only relevant for demo scene and teaser video. Spawns one drone, then another set of drones.
+ */
 public class DemoScript : MonoBehaviour {
     public GameObject[] toggles;
 
